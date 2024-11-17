@@ -6,7 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import markdownit from "markdown-it";
-import React from "react";
+import React, { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import View from "@/components/View";
 export const experimental_ppr = true;
 
 const Startup = async ({ params }: { params: Promise<{ id: string }> }) => {
@@ -69,7 +71,11 @@ const Startup = async ({ params }: { params: Promise<{ id: string }> }) => {
         </div>
         <hr className="divider" />
 
-        {/* Recommended Editors Pick */}
+        {/* // TODO: Recommended Editors Pick */}
+
+        <Suspense fallback={<Skeleton className="view_skeleton" />}>
+          <View id = {id}/>
+        </Suspense>
       </section>
     </>
   );
