@@ -4,6 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
+import { Startup, Author } from "@/sanity/types";
+
+export type StartupCardType = Omit<Startup, "author"> & { author?: Author };
 
 const StartupCard = ({ post }: { post: StartupCardType }) => {
   const {
@@ -42,21 +45,26 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
             <Image
               /* src={author?.image!}
               alt={author?.name!} */
-              src={image}
-              alt={author?.name}
+              src={image || "/default-image.png"}
+              alt={author?.name || "Startup Image"}
               width={48}
               height={48}
               className="rounded-full"
             />
           </Link>
         </div>
-
       </div>
 
       <Link href={`/startup/${_id}`}>
         <p className="startup-card_desc">{description}</p>
 
-        <Image src={image} alt="placeholder" width={144} height={144} className="startup-card_img" />
+        <Image
+          src={image || "/default-image.png"}
+          alt="placeholder"
+          width={144}
+          height={144}
+          className="startup-card_img"
+        />
       </Link>
 
       <div className="flex-between gap-3 mt-5">
