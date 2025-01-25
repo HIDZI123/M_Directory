@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 import { client } from "./sanity/lib/client";
@@ -8,7 +9,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [GitHub],
 
   callbacks: {
-    async signIn({ user, profile }) {
+    async signIn({ user, profile }: any) {
       const { name, image, email } = user;
       const { bio, id, login } = profile;
       const existingUser = await client
